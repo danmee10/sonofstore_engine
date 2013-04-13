@@ -3,6 +3,7 @@ class Order < ActiveRecord::Base
   belongs_to :user
   has_many :order_items, dependent: :destroy
   has_many :products, through: :order_items
+
   validates :user_id, presence: true
   validates :status, presence: true,
                     inclusion: {in: %w(pending cancelled paid shipped returned),
@@ -33,6 +34,10 @@ class Order < ActiveRecord::Base
     #                                   email: params[:user].email,
     #                                   order: order)
     order
+  end
+
+  def shipping_address
+    ShippingAddress.find(self.shipping_address_id)
   end
 
   def update_status
