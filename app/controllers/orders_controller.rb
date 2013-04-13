@@ -35,7 +35,7 @@ class OrdersController < ApplicationController
   # end
 
   def create
-    @order = Order.create(status: 'pending', user_id: current_user.id)
+    @order = Order.create(status: 'pending', user_id: current_user.try(:id))
 
     session[:cart].each do |product_id, quantity|
       product = Product.find(product_id)

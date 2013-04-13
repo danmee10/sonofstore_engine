@@ -1,4 +1,4 @@
-# class Payment
+class Payment
 #   attr_reader :token, :price, :email, :order
 
 #   def self.new_with_charge(params)
@@ -29,4 +29,4 @@
 #                           :card => token,
 #                           :description => email)
 #   end
-# end
+end
