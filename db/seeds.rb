@@ -91,8 +91,8 @@ stores.each { |store| seed_products(store, 500)}
 
 stores.each { |store| seed_categories(store, 10) }
 
-seed_customers(250)
-seed_users(250)
+seed_customers(50)
+seed_users(50)
 
 #product_categories store1
 p_id = 1

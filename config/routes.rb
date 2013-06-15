@@ -1,6 +1,6 @@
 StoreEngine::Application.routes.draw do
   root to: 'stores#index'
-  get "/stores" => redirect('/')
+  # get "/stores" => redirect('/')
 
   get "/code" => redirect("http://github.com/gschorkopf/sonofstore_engine")
   get "/logout" => "sessions#destroy", :as => "logout"
