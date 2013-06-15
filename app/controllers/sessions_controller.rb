@@ -1,18 +1,25 @@
 class SessionsController < ApplicationController
   def new
+    session[:return_to] = request.referrer
   end
 
   def create
     session_params = params[:sessions]
-    user = login(session_params[:email],
-                 session_params[:password],
-                 session_params[:remember_me]
-                 )
-    if user
-      redirect_to session[:return_to] || root_path, notice: 'Logged in!'
+    if Customer.find_by_email(session_params[:email])
+      customer_id = Customer.find_by_email(session_params[:email]).id
+
+      user = login(customer_id,
+                   session_params[:password],
+                   session_params[:remember_me]
+                   )
+      if user
+        redirect_to session[:return_to] || profile_path, notice: 'Logged in!'
+      else
+        flash.alert = 'Username or password was invalid'
+        redirect_to login_path
+      end
     else
-      flash.alert = 'Username or password was invalid'
-      redirect_to login_path
+      redirect_to login_path, notice: "#{session_params[:email]} not on file"
     end
   end
 

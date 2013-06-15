@@ -8,6 +8,37 @@ body {
 }
 
 @import "bootstrap-responsive";
+.modal-backdrop{
+  background-color: #ccc;
+}
+
+.label a{
+  text-decoration: none;
+  color: #fff;
+}
+
+.label:hover {
+  background-color: #345466;
+}
+
+.prod_detail_img {
+  padding-right: 0px;
+  padding-left: 0px;
+  width: 500px;
+}
+
+.prod_detail_img p{
+  margin: 0px;
+  padding: 0px;
+}
+
+.img-rounded{
+  border: 6px solid rgba(68, 117, 123, 0.32);
+}
+
+.prod_detail_text{
+  float: right;
+}
 
 // Nav Bar
 .logo-pic {
@@ -37,7 +68,7 @@ body {
 }
 
 .navbar .navbar-inner{
-  //background: url('texture.jpg') repeat fixed center;
+
 }
 
 //Use this to change the height of the navbar -- may push over the main content
@@ -45,6 +76,16 @@ body {
   height:50px;
 }
 
+#welcome_user{
+float: left;
+padding-top: 32px;
+}
+
+#welcome_user p{
+  font-family: cursive;
+  font-weight: bold;
+  letter-spacing: 0.4em ;
+}
 
 // This makes the scrolly hr rule as seen on homepage
 /* Single-direction drop shadow */
@@ -111,7 +152,7 @@ hr {
   height: 75px;
   width: 100%;
   position: relative;
-  top: 40px;
+  top: 80px;
   left: 0px;
   text-align: center;
   line-height: 40px;
@@ -129,4 +170,41 @@ hr {
 
 #love {
   color: #777;
+}
+
+.lead-background {
+  background-image: none;
+  background-color: none;
+}
+
+.header_spacing {
+  height: 50px;
+}
+
+.store_title {
+  font-family: 'Josefin Sans', sans-serif;
+  color: white;
+  font-size: 200%;
+  position: relative;
+  z-index: 1;
+}
+.store_title_pink a:hover {
+  color:  #536b71;
+}
+.store_title_pink a {
+  color: #b61435;
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 250%;
+}
+.store_description {
+  color: black;
+  position: relative;
+  padding-bottom: none;
+  font-size: 80%;
+  text-align: right;
+}
+.store-description-cursive {
+  color: black;
+  font-family: cursive;
+  letter-spacing: 0.1em ;
 }

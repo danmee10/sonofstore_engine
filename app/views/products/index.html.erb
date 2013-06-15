@@ -1,32 +1,27 @@
 <div class="product-index">
-  <section class="row">
-      <div class="btn-group span1" id="homepage-category-dropdown">
-        <a class="btn btn-custom-lighten dropdown-toggle" data-toggle="dropdown" href="#">
-          <%= t 'categories.select' %>
-          <span class="caret"></span>
-        </a>
-        <ul class="dropdown-menu">
-          <li><a href="/">Show All</a></li>
-          <% unless @categories.nil? %>
-              <% @categories.each do |category| %>
-                  <li>
-                    <%=link_to category.title, products_path(category_id: category.id) %>
-                  </li>
-              <% end %>
-          <% end %>
-        </ul>
-      </div>
 
-      <form action="<%= products_path %>" method="get" class="form-search">
-        <input type="text" id="product-search" value="<%= params[:search] %>" name="search" class="input-medium search-query">
-        <button type="submit" class="btn btn-custom-lighten"><%= t 'navigation.search' %></button>
-      </form>
-  </section>
-
-  <br/>
-
-  <div id="product_listing" class="row-fluid">
-    <%= render @products %>
+  <div class="pull-right">
+    <%= button_to "Browse by category", store_categories_path(current_store),
+        class: 'btn btn-custom-lighten', method: :get %>
+    <% if current_user && (current_user.role_for_store?('store_admin', current_store) || current_user.platform_admin?) %>
+      <%= link_to 'Store Administration', store_admin_path(current_store) %>
+    <% elsif current_user && current_user.role_for_store?('stocker', current_store) %>
+      <%= link_to 'Product Management', store_stock_products_path(current_store) %>
+    <% end %>
   </div>
-</div>
 
+  <div class="store-information">
+    <p class="store_title_pink"><%= link_to current_store, store_home_path(current_store) %></p>
+    <span class="store-description-cursive">"<%= current_store.description %>"</span><br />
+  </div>
+
+  <%= paginate @products %>
+<% cache("product_index_for_store_#{current_store.path}") do %> <!-- Start cache -->
+  <div id="product_listing" class="row-fluid">
+    <% @products.each do |product| %>
+      <%= render partial: 'product',
+          locals: { store: current_store, product: product }  %>
+      <% end %>
+  </div>
+<% end %> <!-- end of caching block-->
+</div>

@@ -2,9 +2,9 @@ class Admin::OrdersController < ApplicationController
   before_filter :require_admin
 
   def index
-    @count = Order.count
-    @orders = Search.filter_admin_orders(params)
-    @statuses = Order.count(group: :status)
+    @count = Order.find_all_by_store_id(current_store.id).count
+    @orders = Order.find_all_by_store_id(current_store.id)
+    @statuses = Order.where(store_id: current_store.id).count(group: :status)
     @active_tab = params[:status] || 'all'
   end
 
@@ -13,6 +13,7 @@ class Admin::OrdersController < ApplicationController
   end
 
   def update
+    @store = current_store
     @order = Order.find(params[:id])
     if params[:update_status]
       @order.update_status

@@ -1,4 +1,4 @@
-Dear <%= @user.full_name.titleize %>,
+Dear <%= @customer.full_name.titleize %>,
 <br>
 <br>
 Thanks so much for your purchase of:
@@ -7,10 +7,12 @@ Thanks so much for your purchase of:
 <%= order_item.quantity %>x <%= order_item.title %>
 <br>
 <% end %>
+
+You can view your order details <a href="pink-sose.herokuapp.com/order_details/<%=@order.uuid_hash%>">here</a>.
 <br>
 We've processed your payment for <%= number_to_currency(@order.total) %>.
 <br>
 <br>
 We hope you stop by again!
 <br>
-Frank's Monsterporium
+Mr. Pink's Son of Store Engine

@@ -1,7 +1,21 @@
 class Category < ActiveRecord::Base
-  attr_accessible :title, :product_ids
-  has_and_belongs_to_many :products
+  attr_accessible :title, :product_ids, :store_id
 
-  validates :title, presence: true,
-                    uniqueness: {case_sensitive: false}
+  has_many :product_categories
+  has_many :products, through: :product_categories
+  belongs_to :store
+
+  validates :title, presence: true
+  validate :unique_category_title_in_store
+
+  def unique_category_title_in_store
+    if exists_in_store?(title, id, store_id)
+      errors.add(:title,"This store can have only one category with this name")
+    end
+  end
+
+  def exists_in_store?(title, id, store_id)
+    !Store.find_by_id(store_id).categories.where("title ILIKE ?", "%#{title}%").
+                      where("id <> ?", id).empty?
+  end
 end
