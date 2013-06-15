@@ -1,0 +1,125 @@
+<div id='order-new'>
+
+
+<% if current_cart.empty? == false %>
+<h3>Please Review Your Order Information</h3>
+
+<hr>
+
+<h4>Your current cart for <%= current_store %>:</h4>
+<br/>
+<table class="table table-striped">
+  <thead>
+    <th></th>
+    <th><%= t('product.self') %></th>
+    <th><%= t('product.price') %></th>
+    <th><%= t('product.quantity') %></th>
+  </thead>
+  <tbody>
+
+    <% @cart_items.each do |cart_item| %>
+  <tr>
+    <% product = Product.find(cart_item[0].to_i) %>
+    <td><%= image_tag generate_image_url(100, product.id) %></td>
+    <td>
+      <%= link_to product.title, store_product_path(current_store, product) %>
+
+      <br>
+      <%= product.description %>
+      <br>
+      <%= link_to t('action.remove'), remove_item_store_cart_path(current_store, remove_item: { product_id: product.id }), confirm: t('confirm'), method: :put %>
+    </td>
+    <td><%= number_to_currency(product.price) %></td>
+    <td>
+      <%= simple_form_for :carts, url: store_cart_path(current_store), method: :put do |f| %>
+        <%= f.hidden_field :product_id, value: product.id %>
+        <%= f.input_field :quantity, value: cart_item[1].to_i, class: 'span1' %>
+        <%= f.button :submit, t('crud.update'), class:'btn btn-info' %>
+      <% end %>
+    </td>
+  </tr>
+<% end %>
+
+  </tbody>
+</table>
+<% else %>
+  Nothing in your cart.  Go shopping!
+<% end %>
+<br/><br/>
+
+<hr>
+
+<div id='order_review_details'>
+  <div id='order_review_shipping'>
+    <h3>Shipping Information:</h3>
+    <ul>
+      <li>
+        <span class="title">Street Address: </span>
+        <%= @customer.shipping_address.street_address %>
+      </li>
+      <li>
+        <span class="title">City: </span>
+        <%= @customer.shipping_address.city %>
+      </li>
+      <li>
+        <span class="title">Zipcode: </span>
+          <%= @customer.shipping_address.zip %></li>
+      <li>
+        <span class="title">State: </span>
+        <%= @customer.shipping_address.state %>
+      </li>
+    </ul>
+  </div>
+
+  <div id='order_review_billing'>
+    <h3>Billing Information:</h3>
+    <ul>
+      <li>
+        <span class="title">Street Address: </span>
+        <%= @customer.billing_address.street_address %>
+      </li>
+      <li>
+        <span class="title">City: </span>
+        <%= @customer.billing_address.city %>
+      </li>
+      <li>
+        <span class="title">Zipcode: </span>
+        <%= @customer.billing_address.zip %>
+      </li>
+      <li>
+        <span class="title">State: </span>
+        <%= @customer.billing_address.state %>
+      </li>
+    </ul>
+  </div>
+
+  <div id='order_review_cc'>
+    <h3>Credit Card Information:</h3>
+    <ul>
+      <li>
+        <span class="title">Credit Card Number: </span>
+          <%= @customer.credit_card.number %>
+      </li>
+      <li>
+        <span class="title">Expiration Month: </span>
+        <%= @customer.credit_card.expiration_month%>
+      </li>
+      <li>
+        <span class="title">Expiration Year: </span>
+        <%= @customer.credit_card.expiration_year%>
+      </li>
+      <li>
+        <span class="title">Security Code: </span>
+        <%= @customer.credit_card.security_code%>
+      </li>
+    </ul>
+  </div>
+
+
+<% if current_cart.empty? %>
+  <h3></h3>
+<% else %>
+<!-- div id='order_review_submit_btn'> -->
+  <%= button_to "Submit Order", store_create_order_path(current_store, @customer.id), class: 'btn btn-large btn-custom-lighten', id:'order_review_submit_btn', method: :post %>
+</div>
+<% end %>

@@ -2,17 +2,27 @@ class Admin::CategoriesController < ApplicationController
   before_filter :require_admin
 
   def index
-    @categories = Category.all
+    @store = current_store
+    @categories = Category.find_all_by_store_id(@store.id)
+  end
+
+  def show
+    @store = current_store
+    @category = Category.find(params[:id])
   end
 
   def new
+    @store = current_store
     @category = Category.new
   end
 
   def create
     @category = Category.new(params[:category])
+    @store = @category.store
     if @category.save
-      redirect_to admin_categories_path,
+      expire_fragment("categories_index_#{@store.path}")
+
+      redirect_to store_admin_categories_path(@store),
       :notice => "Successfully created category."
     else
       render :action => 'new'
@@ -20,23 +30,23 @@ class Admin::CategoriesController < ApplicationController
   end
 
   def edit
+    @user = current_user
+    @store = current_store
     @category = Category.find(params[:id])
+
+    expire_fragment("categories_index_#{@store.path}")
   end
 
   def update
     @category = Category.find(params[:id])
+    @store = @category.store
     if @category.update_attributes(params[:category])
-      redirect_to admin_categories_path,
+      expire_fragment("categories_index_#{@store.path}")
+
+      redirect_to store_admin_categories_path(@store),
       :notice  => "Successfully updated category."
     else
       render :action => 'edit'
     end
   end
-
-  # def destroy
-  #   @product = Product.find(params[:id])
-  #   @product.destroy
-  #   redirect_to admin_products_url,
-  #   :notice => "Successfully destroyed product."
-  # end
 end

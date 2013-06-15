@@ -1,168 +1,672 @@
-User.create(full_name: "Franklin Webber", email: "demoXX+franklin@jumpstartlab.com", password: "password")
-User.create(full_name: "Jeff", email: "demoXX+jeff@jumpstartlab.com", password: "password", display_name: "j3")
-User.create(full_name: "Steve Klabnik", email: "demoXX+steve@jumpstartlab.com", password: "password", display_name: "SkrilleX", admin: true)
-
-file = File.open('./public/images/creatures/stickers/bobby-02.png')
-product1 = Product.create(title: "Bobby", description: "Marcy's triplet brother. He's kind of smelly.", price: 14.19, status: 'active', image: file)
-file.close
-file = File.open('./public/images/creatures/stickers/ruby-green.png')
-product2 = Product.create(title: "Ruby (green)", description: "We <3 it.", price: 120.19, status: 'active', image: file)
-file.close
-file = File.open('./public/images/creatures/stickers/dust-bunny.png')
-product3 = Product.create(title: "Dust Bunny", description: "We swear Frank didn't get his inspiration from Kirby.", price: 2.50, status: 'active', image: file)
-file.close
-file = File.open('./public/images/creatures/stickers/fairy.png')
-product4 = Product.create(title: "The Great Fairy", description: "She'll heal you when you're low on hearts. Keep her in a bottle.", price: 23.90, status: 'active', image: file)
-file.close
-file = File.open('./public/images/creatures/stickers/great-slump.png')
-product5 = Product.create(title: "The Great Slump", description: "The Great Slump has a single claw arm.", price: 272.30, status: 'active', image: file)
-file.close
-file = File.open('./public/images/creatures/stickers/madame-mushroom.png')
-product6 = Product.create(title: "Madam Mushroom", description: "For best results, ingest 30 minutes before you want your vision quest to begin.", price: 104.19, status: 'active', image: file)
-file.close
-file = File.open('./public/images/creatures/stickers/marcy-02.png')
-product7 = Product.create(title: "Macy", description: "Macy, Marcy's triplet sister, is a tom-boy at heart.", price: 104.19, status: 'active', image: file)
-file.close
-file = File.open('./public/images/creatures/stickers/marcy.png')
-product8 = Product.create(title: "Marcy", description: "The one and only (except for her siblings).", price: 104.19, status: 'active', image: file)
-file.close
-file = File.open('./public/images/creatures/stickers/ruby-blue.png')
-product9 = Product.create(title: "Ruby (blue)", description: "We <3 it.", price: 104.19, status: 'active', image: file)
-file.close
-file = File.open('./public/images/creatures/stickers/madame-mushroom-yellow.png')
-product10 = Product.create(title: "Madam Mushroom (yellow)", description: "For best results, ingest 30 minutes before you want your vision quest to begin.", price: 104.19, status: 'active', image: file)
-file.close
-file = File.open('./public/images/creatures/stickers/senor-marshmellow.png')
-product11 = Product.create(title: "Senior Marshmellow", description: "Unfortunately he never learned how to spell his name correctly.", price: 74.44, status: 'active', image: file)
-file.close
-file = File.open('./public/images/creatures/stickers/slump-sr.png')
-product12 = Product.create(title: "Slump, Sr.", description: "The grandfather of all hairballs. He was in a war once, you know.", price: 34.07, status: 'active', image: file)
-file.close
-file = File.open('./public/images/creatures/stickers/slumpy.png')
-product13 = Product.create(title: "Slumpy", description: "The daddy of the bunch.", price: 104.19, status: 'active', image: file)
-file.close
-file = File.open('./public/images/creatures/stickers/soaked-slumpy.png')
-product14 = Product.create(title: "Over-Saturated Slumpy", description: "Slumpy really hates being put in the microwave.", price: 1001.87, status: 'active', image: file)
-file.close
-file = File.open('./public/images/creatures/stickers/madame-mushroom-purple.png')
-product15 = Product.create(title: "Madam Mushroom (purple)", description: "For best results, ingest 30 minutes before you want your vision quest to begin.", price: 1235.99, status: 'active', image: file)
-file.close
-file = File.open('./public/images/creatures/stickers/ruby.png')
-product16 = Product.create(title: "Ruby", description: "We <3 it.", price: 1.19, status: 'active', image: file)
-file.close
-file = File.open('./public/images/creatures/stickers/dust-bunny-purple.png')
-product17 = Product.create(title: "Dust Bunny (purple)", description: "We swear Frank didn't get his inspiration from Kirby.", price: 17.95, status: 'active', image: file)
-file.close
-file = File.open('./public/images/creatures/stickers/squint.png')
-product18 = Product.create(title: "Squint", description: "Expert piano player", price: 24.00, status: 'active', image: file)
-file.close
-file = File.open('./public/images/creatures/stickers/viking.png')
-product19 = Product.create(title: "The Viking", description: "He's really a big softy at heart.", price: 4.70, status: 'active', image: file)
-file.close
-file = File.open('./public/images/creatures/stickers/wizard.png')
-product20 = Product.create(title: "The Wizard", description: "Cranky, hates kids, and doesn't smell very good. I heard he's related to Dumbledore's second cousin.", price: 99.50, status: 'active', image: file)
-file.close
-
-Category.create(title: "Hairballs", product_ids: [1, 5, 7, 8, 12, 13, 14])
-Category.create(title: "Mystics", product_ids: [3, 4, 6, 10, 11, 15, 17, 18, 20])
-Category.create(title: "Bunnies", product_ids: [3, 17])
-Category.create(title: "Brutes", product_ids: [19, 20, 11])
-Category.create(title: "Miscellaneous", product_ids: [2, 9, 16, 4, 15, 18])
-
-Sale.create(status: 'active', group: 'product', foreign_key: 1, percent_off: 50)
-Sale.create(status: 'active', group: 'category', foreign_key: 3, percent_off: 25)
-
-Rating.create(user_id: 3, product_id: 3, title: 'Awesome!', body: "Gotta love this one. It's like Kirby but with better ears!", stars: 4)
-Rating.create(user_id: 2, product_id: 3, title: 'Meh...', body: 'Just a Kirby knock-off.', stars: 2)
-Rating.create(user_id: 2, product_id: 1, title: 'Cool', body: "I'm happy with my purchase", stars: 3)
-Rating.create(user_id: 3, product_id: 1, title: 'Bought two!', body: 'Fantastic', stars: 5)
-
-order1 = Order.create(status: 'pending', user_id: 1)
-order2 = Order.create(status: 'paid', user_id: 1)
-order3 = Order.create(status: 'shipped', user_id: 1)
-order4 = Order.create(status: 'cancelled', user_id: 2)
-order5 = Order.create(status: 'returned', user_id: 2)
-order6 = Order.create(status: 'pending', user_id: 3)
-order7 = Order.create(status: 'paid', user_id: 3)
-order8 = Order.create(status: 'shipped', user_id: 3)
-order9 = Order.create(status: 'pending', user_id: 3)
-order10 = Order.create(status: 'returned', user_id: 3)
-
-order1.order_items.create(product_id: product1.id,
-                          unit_price: product1.price,
-                          selling_price: product1.current_price,
-                          percent_off: product1.percent_off,
-                          quantity: 2)
-
-order1.order_items.create(product_id: product2.id,
-                          unit_price: product2.price,
-                          selling_price: product2.current_price,
-                          percent_off: product2.percent_off,
-                          quantity: 1)
-
-order2.order_items.create(product_id: product2.id,
-                          unit_price: product2.price,
-                          selling_price: product2.current_price,
-                          percent_off: product2.percent_off,
-                          quantity: 1)
-
-order3.order_items.create(product_id: product4.id,
-                          unit_price: product4.price,
-                          selling_price: product4.current_price,
-                          percent_off: product4.percent_off,
-                          quantity: 1)
-
-order3.order_items.create(product_id: product5.id,
-                          unit_price: product5.price,
-                          selling_price: product5.current_price,
-                          percent_off: product5.percent_off,
-                          quantity: 1)
-
-order4.order_items.create(product_id: product12.id,
-                          unit_price: product12.price,
-                          selling_price: product12.current_price,
-                          percent_off: product12.percent_off,
-                          quantity: 1)
-
-order4.order_items.create(product_id: product11.id,
-                          unit_price: product11.price,
-                          selling_price: product11.current_price,
-                          percent_off: product11.percent_off,
-                          quantity: 5)
-
-order5.order_items.create(product_id: product8.id,
-                          unit_price: product8.price,
-                          selling_price: product8.current_price,
-                          percent_off: product8.percent_off,
-                          quantity: 10)
+stores = [
+  Store.create(name: 'Best Sunglasses', path: 'best-sunglasses', description: 'Buy our Sunglasses'),
+  Store.create(name: 'Cool Sunglasses', path: 'cool-sunglasses', description: 'Buy our COOL Sunglasses'),
+  Store.create(name: "Speedy Bikes", path: "speedy-bikes", description: "Put the fun between your legs!"),
+  Store.create(name: "Cool Runnings", path: "cool-runnings", description: "You'll come back tomorrow and the next day and the next day and the next day."),
+  Store.create(name: "Banana Stand", path: "banana-stand", description: "There's always money in the banana stand."),
+  Store.create(name: "Florist-Gump", path: "florist-gump", description: "Life's not like a box of chocolates here.  What you see is what you get!"),
+  Store.create(name: "World of Woolcraft", path: "world-of-woolcraft", description: "Knitting's no joke"),
+  Store.create(name: "Frank's Monsterporium", path: "monsterporium", description: "Monster?  Maybe.  Cuddly?  Definitely."),
+  Store.create(name: "Katrina's Refactorium", path: "refactorium", description: "Crazy code?  Yeah, we can work with it."),
+  Store.create(name: "Jeff's Developer Warehouse", path: "developer-warehouse", description: "Tons of crazy kids... who work for free!")
+]
 
 
-order6.order_items.create(product_id: product15.id,
-                          unit_price: product15.price,
-                          selling_price: product15.current_price,
-                          percent_off: product15.percent_off,
-                          quantity: 1)
 
-order7.order_items.create(product_id: product8.id,
-                          unit_price: product8.price,
-                          selling_price: product8.current_price,
-                          percent_off: product8.percent_off,
-                          quantity: 2)
 
-order8.order_items.create(product_id: product10.id,
-                          unit_price: product10.price,
-                          selling_price: product10.current_price,
-                          percent_off: product10.percent_off,
-                          quantity: 3)
+10.times do
+  Category.create(title: Faker::Lorem.words[0], store_id: 1)
+end
+10.times do
+  Category.create(title: Faker::Lorem.words[0], store_id: 2)
+end
+10.times do
+  Category.create(title: Faker::Lorem.words[0], store_id: 3)
+end
+10.times do
+  Category.create(title: Faker::Lorem.words[0], store_id: 4)
+end
+10.times do
+  Category.create(title: Faker::Lorem.words[0], store_id: 5)
+end
+10.times do
+  Category.create(title: Faker::Lorem.words[0], store_id: 6)
+end
+10.times do
+  Category.create(title: Faker::Lorem.words[0], store_id: 7)
+end
+10.times do
+  Category.create(title: Faker::Lorem.words[0], store_id: 8)
+end
+10.times do
+  Category.create(title: Faker::Lorem.words[0], store_id: 9)
+end
+10.times do
+  Category.create(title: Faker::Lorem.words[0], store_id: 10)
+end
 
-order9.order_items.create(product_id: product9.id,
-                          unit_price: product9.price,
-                          selling_price: product9.current_price,
-                          percent_off: product9.percent_off,
-                          quantity: 4)
+s_id = 1
+10.times do
+  10.times do
+    10.times do
+      Product.create(title: Faker::Address.street_name.split[0],
+        description: "#{Faker::Company.bs} " + "#{Faker::Company.bs}",
+        price: "#{(1..500).to_a.sample}.0".to_f,
+        status: 'active',
+        store_id: s_id)
+        #better way to do fake photos? there's gotta be.
+    end
+  end
+  s_id += 1
+end
 
-order10.order_items.create(product_id: product18.id,
-                          unit_price: product18.price,
-                          selling_price: product18.current_price,
-                          percent_off: product18.percent_off,
-                          quantity: 1)
+#product_categories store1
+p_id = 1
+c_id = 1
+10.times do
+  10.times do
+    ProductCategory.create(product_id: p_id, category_id: c_id)
+    p_id +=1
+  end
+  c_id +=1
+end
+
+#product_categories store2
+p_id = 101
+c_id = 11
+10.times do
+  10.times do
+    ProductCategory.create(product_id: p_id, category_id: c_id)
+    p_id +=1
+  end
+  c_id +=1
+end
+
+#product_categories store3
+p_id = 201
+c_id = 21
+10.times do
+  10.times do
+    ProductCategory.create(product_id: p_id, category_id: c_id)
+    p_id +=1
+  end
+  c_id +=1
+end
+
+#product_categories store4
+p_id = 301
+c_id = 31
+10.times do
+  10.times do
+    ProductCategory.create(product_id: p_id, category_id: c_id)
+    p_id +=1
+  end
+  c_id +=1
+end
+
+#product_categories store5
+p_id = 401
+c_id = 41
+10.times do
+  10.times do
+    ProductCategory.create(product_id: p_id, category_id: c_id)
+    p_id +=1
+  end
+  c_id +=1
+end
+
+#product_categories store6
+p_id = 501
+c_id = 51
+10.times do
+  10.times do
+    ProductCategory.create(product_id: p_id, category_id: c_id)
+    p_id +=1
+  end
+  c_id +=1
+end
+
+#product_categories store7
+p_id = 601
+c_id = 61
+10.times do
+  10.times do
+    ProductCategory.create(product_id: p_id, category_id: c_id)
+    p_id +=1
+  end
+  c_id +=1
+end
+
+#product_categories store8
+p_id = 701
+c_id = 71
+10.times do
+  10.times do
+    ProductCategory.create(product_id: p_id, category_id: c_id)
+    p_id +=1
+  end
+  c_id +=1
+end
+
+#product_categories store9
+p_id = 801
+c_id = 81
+10.times do
+  10.times do
+    ProductCategory.create(product_id: p_id, category_id: c_id)
+    p_id +=1
+  end
+  c_id +=1
+end
+
+#product_categories store10
+p_id = 901
+c_id = 91
+10.times do
+  10.times do
+    ProductCategory.create(product_id: p_id, category_id: c_id)
+    p_id +=1
+  end
+  c_id +=1
+end
+
+customer1 = Customer.create(full_name: "Franklin Webber", email: "demoXX+franklin@jumpstartlab.com")
+customer2 = Customer.create(full_name: "Jeff", email: "demoXX+jeff@jumpstartlab.com")
+customer3 = Customer.create(full_name: "Steve Klabnik", email: "demoXX+steve@jumpstartlab.com")
+customer4 = Customer.create(full_name: "Katrina", email: "demoXX+katrina@jumpstartlab.com")
+
+user1 = User.create(password: "password", customer_id: customer1.id)
+user2 = User.create(password: "password", display_name: "j3", customer_id: customer2.id)
+user3 = User.create(password: "password", display_name: "SkrilleX", customer_id: customer3.id)
+user4 = User.create(password: "password", display_name: "Norway", customer_id: customer4.id)
+
+ur2 = UserRole.new
+ur2.user_id = 2
+ur2.role = "stocker"
+ur2.save
+user3.platform_admin = true
+user3.save
+
+n = 1
+10.times do
+ur4 = UserRole.new
+ur4.user_id = 4
+ur4.role = "store_admin"
+ur4.store_id = n
+ur4.save
+n += 1
+end
+
+
+# stores = [
+#   Store.create(name: 'Best Sunglasses', path: 'best-sunglasses', description: 'Buy our Sunglasses'),
+#   Store.create(name: 'Cool Sunglasses', path: 'cool-sunglasses', description: 'Buy our COOL Sunglasses'),
+#   Store.create(name: "Speedy Bikes", path: "speedy-bikes", description: "Put the fun between your legs!"),
+#   Store.create(name: "Cool Runnings", path: "cool-runnings", description: "You'll come back tomorrow and the next day and the next day and the next day."),
+#   Store.create(name: "Banana Stand", path: "banana-stand", description: "There's always money in the banana stand."),
+#   Store.create(name: "Florist-Gump", path: "florist-gump", description: "Life's not like a box of chocolates here.  What you see is what you get!"),
+#   Store.create(name: "World of Woolcraft", path: "world-of-woolcraft", description: "Knitting's no joke"),
+#   Store.create(name: "Frank's Monsterporium", path: "monsterporium", description: "Monster?  Maybe.  Cuddly?  Definitely."),
+#   Store.create(name: "Katrina's Refactorium", path: "refactorium", description: "Crazy code?  Yeah, we can work with it."),
+#   Store.create(name: "Jeff's Developer Warehouse", path: "developer-warehouse", description: "Tons of crazy kids... who work for free!")
+# ]
+
+# def seed_products(store, count)
+#   count.times do |num|
+#     begin
+#       puts "Seeding product #{num} for store #{store.id}"
+#       title = Faker::Address.street_name.split[0] + rand(10).to_s
+#       description = "#{Faker::Company.bs} " + "#{Faker::Company.bs}"
+#       price = "#{(1..500).to_a.sample}.0".to_f
+#       store.products.create!(title: title,
+#                              description: description,
+#                              status: "active",
+#                              store_id: store.id,
+#                              price: price)
+#     rescue
+#       puts "Product name taken!  Retrying."
+#       retry
+#     end
+#   end
+# end
+
+# def seed_categories(store, count)
+#   count.times do |i|
+#     begin
+#       title = Faker::Lorem.words(2).join(" ")
+#       store.categories.create!(title: title,
+#                                store_id: store.id)
+#       puts "Category #{title} created for Store #{store.id}"
+#     rescue
+#       puts "Category name taken! Retrying."
+#       retry
+#     end
+#   end
+# end
+
+# def seed_customers(count)
+#   names = ["White", "Blonde", "Pink", "Blue", "Brown", "Orange"]
+#   count.times do |i|
+#     puts "seeding customer #{i}"
+#     Customer.create!(full_name: names.sample + rand(100).to_s,
+#                      email: "user#{i}@example.com")
+#   end
+# end
+
+# def seed_users(count)
+#   count.times do |i|
+#     puts "seeding user #{i}"
+#     User.create!(password: "password",
+#                      password_confirmation: "password",
+#                      customer_id: i)
+#   end
+# end
+
+# customer1 = Customer.create(full_name: "Franklin Webber", email: "demoXX+franklin@jumpstartlab.com")
+# customer2 = Customer.create(full_name: "Jeff", email: "demoXX+jeff@jumpstartlab.com")
+# customer3 = Customer.create(full_name: "Steve Klabnik", email: "demoXX+steve@jumpstartlab.com")
+# customer4 = Customer.create(full_name: "Katrina", email: "demoXX+katrina@jumpstartlab.com")
+
+# user1 = User.create(password: "password", customer_id: customer1.id)
+# user2 = User.create(password: "password", display_name: "j3", customer_id: customer2.id)
+# user3 = User.create(password: "password", display_name: "SkrilleX", customer_id: customer3.id)
+# user4 = User.create(password: "password", display_name: "Norway", customer_id: customer4.id)
+
+# customer3.user.platform_admin = true
+# customer3.save
+# customer2.user.platform_admin = true
+# customer2.save
+
+# n = 1
+# 10.times do
+# ur4 = UserRole.new
+# ur4.user_id = 4
+# ur4.role = "store_admin"
+# ur4.store_id = n
+# ur4.save
+# n += 1
+# end
+
+# stores.each { |store| seed_products(store, 500)}
+
+# stores.each { |store| seed_categories(store, 10) }
+
+# seed_customers(250)
+# seed_users(250)
+
+# #product_categories store1
+# p_id = 1
+# c_id = 1
+# 10.times do
+#   50.times do
+#     ProductCategory.create(product_id: p_id, category_id: c_id)
+#     p_id +=1
+#   end
+#   c_id +=1
+# end
+
+# #product_categories store2
+# p_id = 501
+# c_id = 11
+# 10.times do
+#   100.times do
+#     ProductCategory.create(product_id: p_id, category_id: c_id)
+#     p_id +=1
+#   end
+#   c_id +=1
+# end
+
+# #product_categories store3
+# p_id = 1001
+# c_id = 21
+# 10.times do
+#   100.times do
+#     ProductCategory.create(product_id: p_id, category_id: c_id)
+#     p_id +=1
+#   end
+#   c_id +=1
+# end
+
+# #product_categories store4
+# p_id = 1501
+# c_id = 31
+# 10.times do
+#   100.times do
+#     ProductCategory.create(product_id: p_id, category_id: c_id)
+#     p_id +=1
+#   end
+#   c_id +=1
+# end
+
+# #product_categories store5
+# p_id = 2001
+# c_id = 41
+# 10.times do
+#   100.times do
+#     ProductCategory.create(product_id: p_id, category_id: c_id)
+#     p_id +=1
+#   end
+#   c_id +=1
+# end
+
+# #product_categories store6
+# p_id = 2501
+# c_id = 51
+# 10.times do
+#   100.times do
+#     ProductCategory.create(product_id: p_id, category_id: c_id)
+#     p_id +=1
+#   end
+#   c_id +=1
+# end
+
+# #product_categories store7
+# p_id = 3001
+# c_id = 61
+# 10.times do
+#   100.times do
+#     ProductCategory.create(product_id: p_id, category_id: c_id)
+#     p_id +=1
+#   end
+#   c_id +=1
+# end
+
+# #product_categories store8
+# p_id = 3501
+# c_id = 71
+# 10.times do
+#   100.times do
+#     ProductCategory.create(product_id: p_id, category_id: c_id)
+#     p_id +=1
+#   end
+#   c_id +=1
+# end
+
+# #product_categories store9
+# p_id = 4001
+# c_id = 81
+# 10.times do
+#   100.times do
+#     ProductCategory.create(product_id: p_id, category_id: c_id)
+#     p_id +=1
+#   end
+#   c_id +=1
+# end
+
+# #product_categories store10
+# p_id = 4501
+# c_id = 91
+# 10.times do
+#   100.times do
+#     ProductCategory.create(product_id: p_id, category_id: c_id)
+#     p_id +=1
+#   end
+#   c_id +=1
+# end
+
+# statuses = ['pending', 'shipped', 'cancelled', 'returned', 'paid']
+# stores.each do |store|
+#   8.times do |i|
+#     begin
+#       puts "Seeding order #{i} for store #{store.id}"
+#       order = Order.new
+#       order.status = statuses.sample
+#       order.customer_id = rand(250)
+#       order.store_id = store.id
+#       order.save
+#       product = store.products.sample
+#       order.order_items.create(product_id: product.id,
+#                                unit_price: product.price,
+#                                quantity: rand(5))
+#     rescue
+#       retry
+#     end
+#   end
+# end
+
+
+
+# 10.times do
+#   Category.create(title: Faker::Lorem.words[0], store_id: 1)
+# end
+# 10.times do
+#   Category.create(title: Faker::Lorem.words[0], store_id: 2)
+# end
+# 10.times do
+#   Category.create(title: Faker::Lorem.words[0], store_id: 3)
+# end
+# 10.times do
+#   Category.create(title: Faker::Lorem.words[0], store_id: 4)
+# end
+# 10.times do
+#   Category.create(title: Faker::Lorem.words[0], store_id: 5)
+# end
+# 10.times do
+#   Category.create(title: Faker::Lorem.words[0], store_id: 6)
+# end
+# 10.times do
+#   Category.create(title: Faker::Lorem.words[0], store_id: 7)
+# end
+# 10.times do
+#   Category.create(title: Faker::Lorem.words[0], store_id: 8)
+# end
+# 10.times do
+#   Category.create(title: Faker::Lorem.words[0], store_id: 9)
+# end
+# 10.times do
+#   Category.create(title: Faker::Lorem.words[0], store_id: 10)
+# end
+
+# s_id = 1
+# 10.times do
+#   10.times do
+#     10.times do
+#       Product.create(title: Faker::Address.street_name.split[0],
+#         description: "#{Faker::Company.bs} " + "#{Faker::Company.bs}",
+#         price: "#{(1..500).to_a.sample}.0".to_f,
+#         status: 'active',
+#         store_id: s_id)
+#         #better way to do fake photos? there's gotta be.
+#     end
+#   end
+# end
+
+
+#####If everything is burning, go back to this:
+
+# stores = [
+#   Store.create(name: 'Best Sunglasses', path: 'best-sunglasses', description: 'Buy our Sunglasses'),
+#   Store.create(name: 'Cool Sunglasses', path: 'cool-sunglasses', description: 'Buy our COOL Sunglasses'),
+#   Store.create(name: "Speedy Bikes", path: "speedy-bikes", description: "Put the fun between your legs!"),
+#   Store.create(name: "Cool Runnings", path: "cool-runnings", description: "You'll come back tomorrow and the next day and the next day and the next day."),
+#   Store.create(name: "Banana Stand", path: "banana-stand", description: "There's always money in the banana stand."),
+#   Store.create(name: "Florist-Gump", path: "florist-gump", description: "Life's not like a box of chocolates here.  What you see is what you get!"),
+#   Store.create(name: "World of Woolcraft", path: "world-of-woolcraft", description: "Knitting's no joke"),
+#   Store.create(name: "Frank's Monsterporium", path: "monsterporium", description: "Monster?  Maybe.  Cuddly?  Definitely."),
+#   Store.create(name: "Katrina's Refactorium", path: "refactorium", description: "Crazy code?  Yeah, we can work with it."),
+#   Store.create(name: "Jeff's Developer Warehouse", path: "developer-warehouse", description: "Tons of crazy kids... who work for free!")
+# ]
+
+# 10.times do
+#   Category.create(title: Faker::Lorem.words[0], store_id: 1)
+# end
+# 10.times do
+#   Category.create(title: Faker::Lorem.words[0], store_id: 2)
+# end
+# 10.times do
+#   Category.create(title: Faker::Lorem.words[0], store_id: 3)
+# end
+# 10.times do
+#   Category.create(title: Faker::Lorem.words[0], store_id: 4)
+# end
+# 10.times do
+#   Category.create(title: Faker::Lorem.words[0], store_id: 5)
+# end
+# 10.times do
+#   Category.create(title: Faker::Lorem.words[0], store_id: 6)
+# end
+# 10.times do
+#   Category.create(title: Faker::Lorem.words[0], store_id: 7)
+# end
+# 10.times do
+#   Category.create(title: Faker::Lorem.words[0], store_id: 8)
+# end
+# 10.times do
+#   Category.create(title: Faker::Lorem.words[0], store_id: 9)
+# end
+# 10.times do
+#   Category.create(title: Faker::Lorem.words[0], store_id: 10)
+# end
+
+# s_id = 1
+# 10.times do
+#   10.times do
+#     10.times do
+#       Product.create(title: Faker::Address.street_name.split[0],
+#         description: "#{Faker::Company.bs} " + "#{Faker::Company.bs}",
+#         price: "#{(1..500).to_a.sample}.0".to_f,
+#         status: 'active',
+#         store_id: s_id,
+#         photo_url: "http://lorempixel.com/300/300")
+#         #better way to do fake photos? there's gotta be.
+#     end
+#   end
+#   s_id += 1
+# end
+
+# #product_categories store1
+# p_id = 1
+# c_id = 1
+# 10.times do
+#   10.times do
+#     ProductCategory.create(product_id: p_id, category_id: c_id)
+#     p_id +=1
+#   end
+#   c_id +=1
+# end
+
+# #product_categories store2
+# p_id = 101
+# c_id = 11
+# 10.times do
+#   10.times do
+#     ProductCategory.create(product_id: p_id, category_id: c_id)
+#     p_id +=1
+#   end
+#   c_id +=1
+# end
+
+# #product_categories store3
+# p_id = 201
+# c_id = 21
+# 10.times do
+#   10.times do
+#     ProductCategory.create(product_id: p_id, category_id: c_id)
+#     p_id +=1
+#   end
+#   c_id +=1
+# end
+
+# #product_categories store4
+# p_id = 301
+# c_id = 31
+# 10.times do
+#   10.times do
+#     ProductCategory.create(product_id: p_id, category_id: c_id)
+#     p_id +=1
+#   end
+#   c_id +=1
+# end
+
+# #product_categories store5
+# p_id = 401
+# c_id = 41
+# 10.times do
+#   10.times do
+#     ProductCategory.create(product_id: p_id, category_id: c_id)
+#     p_id +=1
+#   end
+#   c_id +=1
+# end
+
+# #product_categories store6
+# p_id = 501
+# c_id = 51
+# 10.times do
+#   10.times do
+#     ProductCategory.create(product_id: p_id, category_id: c_id)
+#     p_id +=1
+#   end
+#   c_id +=1
+# end
+
+# #product_categories store7
+# p_id = 601
+# c_id = 61
+# 10.times do
+#   10.times do
+#     ProductCategory.create(product_id: p_id, category_id: c_id)
+#     p_id +=1
+#   end
+#   c_id +=1
+# end
+
+# #product_categories store8
+# p_id = 701
+# c_id = 71
+# 10.times do
+#   10.times do
+#     ProductCategory.create(product_id: p_id, category_id: c_id)
+#     p_id +=1
+#   end
+#   c_id +=1
+# end
+
+# #product_categories store9
+# p_id = 801
+# c_id = 81
+# 10.times do
+#   10.times do
+#     ProductCategory.create(product_id: p_id, category_id: c_id)
+#     p_id +=1
+#   end
+#   c_id +=1
+# end
+
+# #product_categories store10
+# p_id = 901
+# c_id = 91
+# 10.times do
+#   10.times do
+#     ProductCategory.create(product_id: p_id, category_id: c_id)
+#     p_id +=1
+#   end
+#   c_id +=1
+# end
+
+# customer1 = Customer.create(full_name: "Franklin Webber", email: "demoXX+franklin@jumpstartlab.com")
+# customer2 = Customer.create(full_name: "Jeff", email: "demoXX+jeff@jumpstartlab.com")
+# customer3 = Customer.create(full_name: "Steve Klabnik", email: "demoXX+steve@jumpstartlab.com")
+# customer4 = Customer.create(full_name: "Katrina", email: "demoXX+katrina@jumpstartlab.com")
+
+# user1 = User.create(password: "password", customer_id: customer1.id)
+# user2 = User.create(password: "password", display_name: "j3", customer_id: customer2.id)
+# user3 = User.create(password: "password", display_name: "SkrilleX", customer_id: customer3.id)
+# user4 = User.create(password: "password", display_name: "Norway", customer_id: customer4.id)
+
+# ur2 = UserRole.new
+# ur2.user_id = 2
+# ur2.role = "stocker"
+# ur2.save
+# user3.platform_admin = true
+# user3.save
+
+# n = 1
+# 10.times do
+# ur4 = UserRole.new
+# ur4.user_id = 4
+# ur4.role = "store_admin"
+# ur4.store_id = n
+# ur4.save
+# n += 1
+# end

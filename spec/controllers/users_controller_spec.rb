@@ -8,11 +8,33 @@ describe UsersController do
     end
   end
 
+  describe "create" do
+    it 'saves a new user with valid params' do
+      pending
+      post :create
+    end
+
+    it 'rejects a new user with invalid params' do
+      pending
+    end
+  end
+
+  describe 'update' do
+    it 'updates a users params if theyre valid' do
+      pending
+    end
+
+    it 'rejects invalid user update params' do
+      pending
+    end
+  end
+
   describe "GET#show" do
     context 'when a user is logged in' do
 
       before(:each) do
-        @user = FactoryGirl.create(:user)
+        customer = FactoryGirl.create(:customer)
+        @user = FactoryGirl.create(:user, customer_id: customer.id)
         login_user @user
       end
 
@@ -31,7 +53,7 @@ describe UsersController do
       render_views
       it 'redirects them to the home page' do
         get :show
-        response.should redirect_to(root_path)
+        response.should redirect_to(login_path)
       end
     end
   end

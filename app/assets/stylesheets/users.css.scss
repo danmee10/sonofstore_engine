@@ -3,12 +3,13 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 
-.signup-form {
+#signup, #checkout_new, #shipping_info_page, #billing_info_page, #credit_card_info_page {
   margin: 30px;
 }
 
 .user-index {
   margin: 30px;
+  height: 150px;
 }
 
 .rating-index {
@@ -17,5 +18,12 @@
 
 .rating-edit {
   margin: 30px;
+}
+table.shipping {
+  text-align: right;
+}
+table.shipping td {
+  padding-left: 10px;
+  text-align: left;
 }
 

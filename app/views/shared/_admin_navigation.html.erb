@@ -1,20 +1,22 @@
 <div class="span3">
   <ul class="nav nav-list">
-    <li class="nav-header"><%= t('admin.self') %></li>
-    <li class="<%= active == :dashboard ? 'active' : '' %>">
-      <%= link_to t('admin.dashboard'), admin_dashboard_path %>
+    <li class="nav-header"><%= current_store %> - Management</li>
+    <li class="<%= active == :stores ? 'active' : '' %>">
+      <%= link_to 'Administration', store_admin_path(current_store) %> 
     </li>
     <li class="<%= active == :products ? 'active' : '' %>">
-      <%= link_to t('product.collection'), admin_products_path %>
+      <%= link_to t('product.collection'), store_admin_products_path %>
     </li>
     <li class="<%= active == :categories ? 'active' : '' %>">
-      <%= link_to t('categories.self'), admin_categories_path %>
+      <%= link_to t('categories.self'), store_admin_categories_path %>
     </li>
-    <li class="<%= active == :sales ? 'active' : '' %>">
-      <%= link_to t('sale.collection'), admin_sales_path %>
+    <li class="<%= active == :back ? 'active' : '' %>">
+      <%= link_to 'Back to Manage My Stores', profile_path %>
     </li>
-    <li class="<%= active == :search ? 'active' : '' %>">
-      <%= link_to t('navigation.search'), admin_search_path %>
+    <% if current_user.platform_admin? %>
+    <li class="<%= active == :all_stores ? 'active' : '' %>">
+      <%= link_to 'Back to Manage All Stores', admin_stores_path %>
     </li>
+    <% end %>
   </ul>
 </div>
