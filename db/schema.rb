@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130416154101) do
+ActiveRecord::Schema.define(:version => 20130616155007) do
 
   create_table "billing_addresses", :force => true do |t|
     t.string   "street_address"
@@ -148,12 +148,12 @@ ActiveRecord::Schema.define(:version => 20130416154101) do
     t.string   "display_name"
     t.string   "crypted_password"
     t.string   "salt"
-    t.datetime "created_at",                   :null => false
-    t.datetime "updated_at",                   :null => false
+    t.datetime "created_at",                                      :null => false
+    t.datetime "updated_at",                                      :null => false
     t.string   "remember_me_token"
     t.datetime "remember_me_token_expires_at"
-    t.boolean  "platform_admin"
     t.integer  "customer_id"
+    t.boolean  "platform_admin",               :default => false
   end
 
   add_index "users", ["customer_id"], :name => "index_users_on_customer_id"

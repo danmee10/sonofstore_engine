@@ -14,8 +14,8 @@ class User < ActiveRecord::Base
 
   belongs_to :customer
 
-  def default_values
-    self.platform_admin = false
+  def self.exists?(email)
+    User.email(email) ? true : false
   end
 
   def to_s
@@ -23,7 +23,7 @@ class User < ActiveRecord::Base
   end
 
   def self.email(email)
-    customer = Customer.find_by_email("#{email}")
+    customer = Customer.find_by_email(email)
     user = User.find_by_customer_id(customer.id)
   end
   ### WHAT IS THIS

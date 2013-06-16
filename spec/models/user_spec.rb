@@ -14,7 +14,7 @@ describe User do
   end
 
   it 'is invalid without a customer_id' do
-    expect(FactoryGirl.build(:user, password: '')).to_not be_valid
+    expect(FactoryGirl.build(:user)).to_not be_valid
   end
 
   it 'is invalid if display name is not between 2-32 chars if it exists' do
@@ -27,4 +27,10 @@ describe User do
     user = FactoryGirl.build(:user, customer_id: @customer.id)
     expect(user.platform_admin).to be_false
   end
+
+  describe "#exists?(email)" do
+    it "returns false if no User in db is connected with given email"
+    it "returns true if User in db is connected with given email"
+  end
+
 end
