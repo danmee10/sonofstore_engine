@@ -24,7 +24,7 @@ class User < ActiveRecord::Base
 
   def self.email(email)
     customer = Customer.find_by_email(email)
-    user = User.find_by_customer_id(customer.id)
+    customer ? User.find_by_customer_id(customer.id) : nil
   end
   ### WHAT IS THIS
 
