@@ -9,20 +9,21 @@ class UsersController < ApplicationController
       redirect_to signup_path, alert: "Email already exists"
     else
       @signup = Signup.new(params)
-    end
 
 
-    if @signup.success?
 
-      Mailer.welcome_email(@signup.user).deliver
-      # Resque.enqueue(IntroMailer, @user.id)
-      auto_login(@signup.user)
+      if @signup.success?
 
-      redirect_to session[:return_to] || root_path, notice: 'Logged in!'
-    elsif @signup.message
-      redirect_to signup_path, alert: "Email already exists"
-    else
-      redirect_to signup_path, alert: "#{formated_errors}"
+        Mailer.welcome_email(@signup.user).deliver
+        # Resque.enqueue(IntroMailer, @user.id)
+        auto_login(@signup.user)
+
+        redirect_to session[:return_to] || root_path, notice: 'Logged in!'
+      elsif @signup.message
+        redirect_to signup_path, alert: "Email already exists"
+      else
+        redirect_to signup_path, alert: "#{formated_errors}"
+      end
     end
   end
 

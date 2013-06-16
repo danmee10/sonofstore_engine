@@ -12,19 +12,33 @@ describe 'new user creates and edits account' do
   end
 
   describe 'registering a new account' do
-    before(:each) do
-      signup_user
-    end
 
-    context 'when they provide unique login info' do
-      it 'creates a new user account' do
+    context 'when new customer signs up for an account' do
+      it 'creates a new customer and new user account' do
+        signup_user
         expect(page).to have_content "Welcome, Maya Angelou"
+        expect(Customer.find_by_email("poetry@poetry.com")).to_not be nil
+        expect(User.find_by_display_name("poet")).to_not be nil
         expect(current_path).to eq root_path
       end
     end
 
-    context 'when they provide non-unique login info for registration' do
+    context 'when returning customer signs up for an account' do
+      it 'creates a User and associates it with customer on file' do
+        Customer.create(email: "poetry@poetry.com", full_name: 'Maya Angelou')
+        signup_user
+        expect(page).to have_content "Welcome, Maya Angelou"
+        expect(Customer.find_all_by_email("poetry@poetry.com").count).to be 1
+        user = User.find_by_display_name("poet")
+        expect(user).to_not be nil
+        expect(user.customer.full_name).to eq 'Maya Angelou'
+        expect(current_path).to eq root_path
+      end
+    end
+
+    context 'when existing user tries to sign up again with same email' do
       it 'returns an error message' do
+        signup_user
         visit '/signup'
         fill_in "full_name", with: 'IMPOSTER'
         fill_in "email", with: 'poetry@poetry.com'
@@ -33,11 +47,11 @@ describe 'new user creates and edits account' do
         fill_in "password_confirmation", with: 'poet'
         click_button "Sign Up"
         expect(page).to have_content "Email already exists"
-        expect(current_path).to eq '/users'
+        expect(current_path).to eq '/signup'
       end
     end
   end
-
+#######
   describe 'signing in and out of account' do
     before(:each) do
       signup_user

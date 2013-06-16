@@ -1,13 +1,12 @@
 class Signup
   attr_reader :customer, :user, :message
 
-
   def initialize(params)
     if Customer.find_by_email(params[:email])
       @customer = Customer.new
       @user = User.new
     else
-      @customer = Customer.create(email: params[:email])
+      @customer = Customer.new(email: params[:email])
       @customer.full_name = params[:full_name]
       @customer.save
 
