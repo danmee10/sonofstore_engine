@@ -44,7 +44,6 @@ FactoryGirl.define do
      #is there a way i can assign customer_id in here? it would be nice
     display_name 'Booner'
     password 'password'
-    platform_admin false
   end
 
   factory :store_admin, parent: :user do
