@@ -2,29 +2,18 @@ class Signup
   attr_reader :customer, :user, :message
 
   def initialize(params)
-    if Customer.find_by_email(params[:email])
-      @customer = Customer.new
-      @user = User.new
-    else
-      @customer = Customer.new(email: params[:email])
-      @customer.full_name = params[:full_name]
-      @customer.save
+    @customer = find_or_create_customer(params[:email], params[:full_name])
+    @user = User.create(password: params[:password],
+           password_confirmation: params[:password_confirmation],
+                    display_name: params[:display_name],
+                     customer_id: @customer.id)
+  end
 
-      @user = User.find_or_create_by_customer_id(@customer.id)
-      @user.update_attributes(password: params[:password],
-                 password_confirmation: params[:password_confirmation])
-      unless params[:display_name].blank?
-        @user.update_attributes(display_name: params[:display_name])
-      end
-    end
-    if Customer.find_by_email(params[:email]) != nil && Customer.find_by_email(params[:email]).user == nil
-      @customer = Customer.find_by_email(params[:email])
-      @customer.full_name = params[:full_name]
-      @customer.save
-      @user = User.create(password: params[:password],
-             password_confirmation: params[:password_confirmation],
-                      display_name: params[:display_name],
-                       customer_id: @customer.id)
+  def find_or_create_customer(email, full_name)
+    if Customer.find_by_email(email)
+      Customer.find_by_email(email)
+    else
+      Customer.create!(email: email, full_name: full_name)
     end
   end
 

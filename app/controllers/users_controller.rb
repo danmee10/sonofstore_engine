@@ -15,7 +15,6 @@ class UsersController < ApplicationController
       if @signup.success?
 
         Mailer.welcome_email(@signup.user).deliver
-        # Resque.enqueue(IntroMailer, @user.id)
         auto_login(@signup.user)
 
         redirect_to session[:return_to] || root_path, notice: 'Logged in!'
