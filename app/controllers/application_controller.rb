@@ -10,7 +10,7 @@ class ApplicationController < ActionController::Base
   #redirects the user to their homepage whenever they add or edit
   #this information directly
   ##########
-  before_filter :get_referrer, :except => [:create, :update, :destroy, :signup]
+  before_filter :get_referrer, :except => [:create, :update, :destroy, :new]
 
 
 #should be set_return_to or save_referrer.....

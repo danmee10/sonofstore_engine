@@ -3,12 +3,12 @@ require 'spec_helper'
 describe 'new user creates and edits account' do
   def signup_user
     visit '/signup'
-    fill_in "full_name", with: 'Maya Angelou'
-    fill_in "email", with: 'poetry@poetry.com'
-    fill_in "display_name", with: 'poet'
-    fill_in "password", with: 'poet'
-    fill_in "password_confirmation", with: 'poet'
-    click_button "Sign Up"
+    fill_in "user_customer_full_name", with: 'Maya Angelou'
+    fill_in "user_customer_email", with: 'poetry@poetry.com'
+    fill_in "user_display_name", with: 'poet'
+    fill_in "user_password", with: 'poet'
+    fill_in "user_password_confirmation", with: 'poet'
+    click_button "Create User"
   end
 
   describe 'registering a new account' do
@@ -40,13 +40,13 @@ describe 'new user creates and edits account' do
       it 'returns an error message' do
         signup_user
         visit '/signup'
-        fill_in "full_name", with: 'IMPOSTER'
-        fill_in "email", with: 'poetry@poetry.com'
-        fill_in "display_name", with: 'poet'
-        fill_in "password", with: 'poet'
-        fill_in "password_confirmation", with: 'poet'
-        click_button "Sign Up"
-        expect(page).to have_content "Email already exists"
+        fill_in "user_customer_full_name", with: 'IMPOSTER'
+        fill_in "user_customer_email", with: 'poetry@poetry.com'
+        fill_in "user_display_name", with: 'poet'
+        fill_in "user_password", with: 'poet'
+        fill_in "user_password_confirmation", with: 'poet'
+        click_button "Create User"
+        expect(page).to have_content "Account already exists with that email"
         expect(current_path).to eq '/signup'
       end
     end
@@ -55,16 +55,45 @@ describe 'new user creates and edits account' do
       context "user enters invalid credentials" do
         it "triggers appropriate flash message if user enters invalid email" do
           visit '/signup'
-          fill_in "full_name", with: 'Maya Angelou'
-          fill_in "email", with: 'poetry@poetry.com'
-          fill_in "display_name", with: 'poet'
-          fill_in "password", with: 'poet'
-          fill_in "password_confirmation", with: 'poet'
-          click_button "Sign Up"
+          fill_in "user_customer_full_name", with: 'Maya Angelou'
+          fill_in "user_customer_email", with: 'poetry.com'
+          fill_in "user_display_name", with: 'poet'
+          fill_in "user_password", with: 'poet'
+          fill_in "user_password_confirmation", with: 'poet'
+          click_button "Create User"
+          expect(page).to have_content "Please enter a vaild email address"
         end
-        it "triggers appropriate flash message if user enters invalid full_name"
-        it "triggers appropriate flash message if user enters invalid password"
-        it "triggers appropriate flash message if user enters invalid display_name"
+
+        it "triggers appropriate flash message if user fails to fill required field" do
+          visit '/signup'
+          fill_in "user_customer_email", with: 'poetry@poetry.com'
+          fill_in "user_display_name", with: 'poet'
+          fill_in "user_password", with: 'poet'
+          fill_in "user_password_confirmation", with: 'poet'
+          click_button "Create User"
+          expect(page).to have_content "Please fill in all required fields"
+        end
+
+        it "triggers appropriate flash message if password doesn't match confirmation" do
+          visit '/signup'
+          fill_in "user_customer_full_name", with: 'Maya Angelou'
+          fill_in "user_customer_email", with: 'poetry@poetry.com'
+          fill_in "user_display_name", with: 'poet'
+          fill_in "user_password", with: 'poet'
+          fill_in "user_password_confirmation", with: 'gorrilla'
+          click_button "Create User"
+          expect(page).to have_content "Password must match confirmation"
+        end
+        it "triggers appropriate flash message if user enters invalid display_name" do
+          visit '/signup'
+          fill_in "user_customer_full_name", with: 'Maya Angelou'
+          fill_in "user_customer_email", with: 'poetry@poetry.com'
+          fill_in "user_display_name", with: 't'
+          fill_in "user_password", with: 'poet'
+          fill_in "user_password_confirmation", with: 'poet'
+          click_button "Create User"
+          expect(page).to have_content "Display name must be between 2 and 32 characters"
+        end
       end
     end
   end

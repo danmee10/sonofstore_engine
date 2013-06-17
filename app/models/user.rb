@@ -8,6 +8,8 @@ class User < ActiveRecord::Base
   validates_presence_of :customer_id, :on => :create
 
   validates :display_name, length: { in: 2..32 }, allow_blank: :true
+  validates_uniqueness_of :customer_id
+
 
   has_many :user_roles
   has_many :stores, through: :user_roles
